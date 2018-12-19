@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -15,6 +16,10 @@ class LogoutView extends Component {
     return null;
   }
 }
+
+LogoutView.propTypes = {
+  authActions: PropTypes.object.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   authActions: bindActionCreators(authActions, dispatch)

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Button from '@material-ui/core/Button';
 import * as cheatActions from '../../actions/cheatActions';
 import TextInput from '../common/TextInput';
-
-
+import {FormErrors} from '../common/FormErrors';
 
 class AddCheatSheetForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
       title: '',
       titleValid: false,
       formValid: false,
@@ -28,7 +28,8 @@ class AddCheatSheetForm extends Component {
     switch (fieldName) {
       case 'title':
         titleValid = value.length >= 5;
-        fieldValidationErrors.title = titleValid ? '' : 'should be at least 5 characters.';
+        fieldValidationErrors.title = titleValid ?
+        '' : 'should be at least 5 characters.';
         break;
       default:
         break;
@@ -49,18 +50,18 @@ class AddCheatSheetForm extends Component {
   handleOnChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    this.setState(
-      {[name]: value},
-      () => { this.validateField(name, value)});
+    this.setState({[name]: value}, () => {
+       this.validateField(name, value)
+     });
   }
 
   handleOnSubmit = (e) => {
     e.preventDefault();
     const { title } = this.state;
-    const cheatData = {
-      title: title
-    }
+    const cheatData = {title: title}
     this.props.cheatActions.createCheatSheet(cheatData)
+    this.setState({title: ''})
+    this.props.history.push('/cheats')
   }
 
   handleOnCancel = (e) => {
@@ -70,26 +71,39 @@ class AddCheatSheetForm extends Component {
   }
 
   render() {
-    console.log("thi props ==>", this.state.title);
+    const isDisabled = this.state.formValid
     return (
-      <form className="add_cheat_form" onClick={this.handleOnSubmit}>
+      <form className="add_cheat_form"
+        onSubmit={this.handleOnSubmit}>
+        <FormErrors formErrors={this.state.formErrors} />
         <TextInput
           placeholder="e.g Configuration"
           label="Title"
+          name="title"
           onChange={this.handleOnChange}
         />
+
         <button
-          className='btn btn-success'
+          variant="contained"
+          color="primary"
           type='submit'
-        >Add</button>
+          disabled={!isDisabled}
+          className='btn btn-success'
+        >Add cheat</button>
         <button
+          variant="contained"
+          color="secondary"
           onClick={this.handleOnCancel}
-          type='button'
           className='btn btn-danger'
-        >Cancel</button>
+          type='button'>Cancel</button>
       </form>
     );
   }
+}
+
+AddCheatSheetForm.propTypes = {
+  singleCheat: PropTypes.object.isRequired,
+  cheatActions: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

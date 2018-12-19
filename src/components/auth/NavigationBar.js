@@ -1,32 +1,54 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, Link, Redirect } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as authActions from '../../actions/authActions';
 
-
-
 class NavigationBar extends Component {
-  constructor(props){
-    super(props);
-  }
   navBarLinks() {
+    const { _id } = this.props.singleCheat;
     if(this.props.auth.isAuthenticated) {
       return (
         <div className="nav_menu">
-          <Link className="nav_link" to="/cheats">Cheats</Link>
-          <div className='topnav-right'>
-            <Link className="nav_link" to="/createCheat">+ Create Cheat</Link>
-            <Link className="nav_link" to="">Profile</Link>
-            <Link className="nav_link" onClick={this.handleLogout} to="/logout">Logout</Link>
+          <Link className="nav_link"
+            to="/cheats">
+            <b>
+              {this.props.auth.user.username}
+            </b>
+          </Link>
+          <div
+            className='topnav-right'>
+            <Link
+              className="nav_link"
+              to={
+                 _id ?
+                `/cheats/${_id}/add-command` :
+                "/createCheat"
+                }>
+             { _id ? '+ Command' : '+ Cheat' }
+            </Link>
+            <Link
+              className="nav_link"
+              onClick={this.handleLogout}
+              to="/logout">Logout</Link>
           </div>
         </div>
       );
     }
     return (
-      <div className="nav_menu">
-        <Link className="nav_link" to="/">Register</Link>
-        <Link className="nav_link" to="/Login">Login</Link>
+      <div
+        className="nav_menu">
+        <div
+          className="topnav-right">
+          <Link
+            className="nav_link" to="/">
+            Register
+          </Link>
+          <Link
+            className="nav_link"
+            to="/Login">Login</Link>
+        </div>
       </div>
     );
   }
@@ -41,8 +63,15 @@ class NavigationBar extends Component {
   }
 }
 
+
+NavigationBar.propTypes = {
+  singleCheat: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
 const mapStateToProps = state => {
   return {
+    singleCheat: state.singleCheat,
     auth: state.auth
   };
 };

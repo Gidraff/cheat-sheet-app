@@ -2,8 +2,6 @@ import instance from '../config/axiosConfig';
 import jsonwebtoken from 'jsonwebtoken';
 import * as actions from './types';
 
-
-
 export const registerUser = (userData, history)  => dispatch => {
   instance.post('/api/user/register', userData)
     .then(res => {

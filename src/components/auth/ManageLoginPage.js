@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -28,12 +29,16 @@ class ManageLoginPage extends Component {
 
     switch (fieldName) {
     case 'email':
-      emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-      fieldValidationErrors.email = emailValid ? '' : 'is not valid.';
+      emailValid = value.match(
+        /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
+      );
+      fieldValidationErrors.email = emailValid ?
+      '' : 'is not valid.';
       break;
     case 'password':
       passwordValid = value.trim().length >= 8;
-      fieldValidationErrors.password = passwordValid ? '' : 'should be at least 8 characters.';
+      fieldValidationErrors.password = passwordValid ?
+      '' : 'should be at least 8 characters.';
       break;
     default:
       break;
@@ -48,44 +53,50 @@ class ManageLoginPage extends Component {
 
   validateForm() {
     this.setState({
-      formValid: this.state.emailValid && this.state.passwordValid
+      formValid: this.state.emailValid &&
+      this.state.passwordValid
     });
   }
 
   handleOnChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    this.setState(
-      {[name]: value},
-      () => { this.validateField(name, value)});
+    this.setState({[name]: value}, () => {
+      this.validateField(name, value)
+    });
   }
 
   handleOnSubmit = (e) => {
     e.preventDefault();
     const {email, password} = this.state;
-
     const userData = {
       email: email,
       password: password
     }
-    this.props.authActions.loginUser(userData, this.props.history)
+
+    this.props.authActions.loginUser(
+      userData, this.props.history
+    )
   }
 
   render(){
-    console.log("login props", this.props);
     const isDisabled = this.state.formValid
     return (
       <div className='auth-form-container'>
         <LoginForm
           isDisabled={isDisabled}
           formErrors={this.state.formErrors}
-          errorClass={this.errorClass}
           handleOnChange={this.handleOnChange}
           handleOnSubmit={this.handleOnSubmit}
         />
       </div>
     );
   }
+}
+
+ManageLoginPage.propTypes = {
+  authActions: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {

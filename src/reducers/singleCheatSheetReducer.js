@@ -13,6 +13,9 @@ const singleCheatReducer = (state = initialState.singleCheatSheet, action) => {
   case actions.LOAD_SINGLE_CHEAT_SHEET_FAILURE:
     return action.payload;
 
+  case actions.RESET_SINGLE_CHEAT_SHEET:
+    return  action.payload;
+
   default:
     break;
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -17,7 +18,6 @@ class ManageRegisterPage extends Component {
       usernameValid: false,
       emailValid: false,
       passwordValid: false,
-      confirmValid: false,
       formValid: false,
       formErrors: {
         username: '',
@@ -37,20 +37,27 @@ class ManageRegisterPage extends Component {
 
     switch (fieldName) {
       case 'username':
-        usernameValid = value.length >= 5;
-        fieldValidationErrors.username = usernameValid ? '' : 'should be at least 5 characters.';
+        usernameValid = value.trim().length >= 5;
+        fieldValidationErrors.username = usernameValid ?
+         '' : 'should be at least 5 characters.';
         break;
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? '' : 'is not valid.';
+        emailValid = value.match(
+          /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
+        );
+        fieldValidationErrors.email = emailValid ?
+        '' : 'is not valid.';
         break;
       case 'password':
         passwordValid = value.trim().length >= 8
-        fieldValidationErrors.password = passwordValid ? '' : 'should be at least 8 characters.';
+        fieldValidationErrors.password = passwordValid ?
+        '' : 'should be at least 8 characters.';
         break;
       case 'confirm':
-        confirmValid = value.length >= 8 && value === this.state.password;
-        fieldValidationErrors.confirm = confirmValid ? '' : 'do not match';
+        confirmValid = value.trim().length >= 8 &&
+        value.trim() === this.state.password.trim()
+        fieldValidationErrors.confirm = confirmValid ?
+        '' : 'do not match';
         break;
       default:
         break;
@@ -67,46 +74,42 @@ class ManageRegisterPage extends Component {
 
   validateForm() {
     this.setState({
-      formValid: this.state.usernameValid && this.state.emailValid && this.state.passwordValid && this.state.confirmValid
+      formValid: this.state.usernameValid &&
+      this.state.emailValid &&
+      this.state.passwordValid &&
+      this.state.confirmValid
     })
-  }
-
-  errorClass(error) {
-    return(error.length === 0 ? '' : 'has-error');
   }
 
   handleOnChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    this.setState(
-      {[name]: value},
-      () => { this.validateField(name, value)});
+    this.setState({[name]: value}, () => {
+      this.validateField(name, value)
+    });
   }
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log("qwertyuio==", this.props);
-    const { username, email, password, confirm} = this.state;
-    console.log('statte', password, username, email);
-    if(password === confirm) {
-      const userData = {
-        username: username,
-        email: email,
-        password: password
-      }
-      this.props.authActions.registerUser(userData, this.props.history)
+    const { username, email, password} = this.state;
+    const userData = {
+      username: username,
+      email: email,
+      password: password
     }
-
+    this.props.authActions.registerUser(
+      userData, this.props.history
+    )
   }
 
   render(){
     const isDisabled = this.state.formValid
     return (
-      <div className='auth-form-container'>
+      <div
+        className='auth-form-container'>
         <RegisterForm
           isDisabled={isDisabled}
           formErrors={this.state.formErrors}
-          errorClass={this.errorClass}
           handleOnChange={this.handleOnChange}
           handleOnSubmit={this.handleOnSubmit}
         />
@@ -115,10 +118,15 @@ class ManageRegisterPage extends Component {
   }
 }
 
+ManageRegisterPage.propTypes = {
+  authActions: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
 const mapStateToProps = state => {
-    return {
-      auth: state.auth
-    }
+  return {
+    auth: state.auth
+  }
 };
 
 const mapDispatchToProps = (dispatch) => ({

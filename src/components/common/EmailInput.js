@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const EmailInput = ({name, label, onChange, placeholder, value, formErrors}) => {
+const EmailInput = ({name, label, onChange, value, formErrors}) => {
   let wrapperClass = 'form-group';
   if (formErrors && formErrors.email.length > 0) {
     wrapperClass += ' ' + 'has-error';
   }
-
   return (
     <div className={wrapperClass}>
-      <label htmlFor={name}>{label}</label>
+      <label
+        htmlFor={name}>
+        {label}
+      </label>
       <div className="field">
         <input
           type="text"
@@ -29,9 +31,8 @@ EmailInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
   value: PropTypes.string,
-  error: PropTypes.string
+  formErrors: PropTypes.object.isRequired
 };
 
 export default EmailInput;

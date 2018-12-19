@@ -1,43 +1,71 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as cheatActions from '../../actions/cheatActions';
 import CheatSheetList from './CheatSheetList';
+import SearchInput from './SearchInput';
 
 class ManageCheatSheetPage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state ={
-      cheats: []
-    };
+    this.state = {
+      searchText: ''
+    }
   }
   componentDidMount(){
     this.props.cheatActions.fetchCheatSheets();
+    this.props.cheatActions.resetSingleCheatSheet();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.cheats.docs !== nextProps.cheats.docs) {
-      this.setState({cheats: nextProps.cheats.docs});
+  componentDidUpdate(prevProps) {
+    if(this.props.cheats !== prevProps.cheats) {
+      this.setState({cheats: this.props.cheats});
     }
   }
 
+  handleDelete = (cheatId) => {
+    if (cheatId) {
+      this.props.cheatActions.deleteCheatSheet(cheatId)
+    }
+    return;
+  }
+
+  handleOnChange = (event) => {
+    this.setState({ searchText: event.target.value })
+  };
+
   render() {
-    if (this.state.cheats.length > 0) {
+    const {cheats}  = this.props;
+    const { cheatId } = this.props.match.params;
+    if (cheats.length > 0) {
       return (
         <div className='main_content'>
+          <SearchInput
+            value={this.state.searchText}
+            handleOnChange={this.handleOnChange}
+          />
           <CheatSheetList
-            cheats={this.props.cheats.docs}
+            searchText={this.state.searchText}
+            cheatId={cheatId}
+            handleDelete={this.handleDelete}
+            cheats={cheats}
           />
         </div>
       );
     }
     return (
-      <div>
-        <span>No Cheats available</span>
+      <div className='empty_content'>
+        <h2>No cheats available for this User</h2>
       </div>
     );
   }
+}
+
+ManageCheatSheetPage.propTypes = {
+  cheats: PropTypes.array.isRequired,
+  cheatActions: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

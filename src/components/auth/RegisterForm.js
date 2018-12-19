@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextInput from '../common/TextInput';
 import EmailInput from '../common/EmailInput';
 import PasswordInput from '../common/PasswordInput';
@@ -7,9 +8,11 @@ import {FormErrors} from '../common/FormErrors';
 
 const RegisterForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled}) => {
   return (
-    <form className='login-form' onSubmit={handleOnSubmit}>
+    <form className='login-form'
+      onSubmit={handleOnSubmit}>
       <h3>Register</h3>
-      <FormErrors formErrors={formErrors} />
+      <FormErrors
+        formErrors={formErrors} />
       <br/>
       <TextInput
         name='username'
@@ -43,12 +46,20 @@ const RegisterForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled})
         onChange={handleOnChange}
       />
       <button
-        // id='login-input'
+        type="submit"
         className='btn btn-success'
         disabled={!isDisabled}
       >Register</button>
     </form>
   );
 };
+
+RegisterForm.propTypes = {
+  handleOnChange: PropTypes.func.isRequired,
+  handleOnSubmit: PropTypes.func.isRequired,
+  formErrors: PropTypes.object.isRequired,
+  isDisabled: PropTypes.bool.isRequired
+};
+
 
 export default RegisterForm;

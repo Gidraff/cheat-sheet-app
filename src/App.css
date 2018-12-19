@@ -33,7 +33,7 @@
 
 .auth-form-container {
   width: 70%;
-  margin: 0 15%;
+  margin: 8em 15%;
 }
 
 .login-form {
@@ -41,6 +41,7 @@
   padding: 3% 3%;
   width: 50%;
   box-shadow: 0em 0em 1em grey;
+  background: #393939 ;
 }
 
 #login-input {
@@ -50,9 +51,12 @@
 
 .add_cheat_form {
   width: 20%;
-  margin: auto;
+  margin: 10em auto;
 }
 
+.not_found {
+  text-align: center;
+}
 
 .error {
    border: 1px solid red;
@@ -67,12 +71,17 @@
 }
 
 .nav_menu {
-  overflow: hidden;
+  width: 90%;
+  margin: 0 5%;
+  position: fixed;
+  background-color: #333;
+  top: 0;
+  z-index: 1;
 }
 
 .nav_menu a:hover {
-  background-color: #777777;
-  color: #14142A;
+  background-color: #ec7f37;
+  color: white;
 }
 
 /* Add a color to the active/current link */
@@ -90,42 +99,93 @@
 }
 
 .search_bar {
-  text-align: center;
+  /* text-align: center; */
 }
 .search_bar input {
   background-color: #f2f2f2;
 }
 
  .main_content {
-   width: 90%;
+   width: 80%;
    margin:auto;
   /* display: flex; */
     /* align-items:flex-start; */
  }
 
  .single_cheat {
-   width: 50%;
-   margin: auto;
+   width: 70%;
+   margin: 5em 17% 0 10%;
+   padding: 1em;
  }
 
-h5 {
-  margin-top: 0;
+.item_header {
   background-color: #EB9108;
   padding: 0.5rem;
-  margin: 0;
-  border: 0;
   color: #14142A;
-  border-radius: 1rem;
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  justify-content: space-between;
 }
 
+.delete_icon {
+  margin-top: 0.5em;
+  font-size: 15px;
+}
 
+.delete_icon:hover {
+  margin-top: 0.5em;
+  font-size: 15px;
+  border-radius: 50%;
+  background-color: red;
+  padding: 0.2em;
+  cursor: pointer;
+
+}
+
+.btn_container {
+  display: flex;
+}
+
+.btn_container span {
+  margin: 0.5rem;
+  padding: 0.5em;
+}
+
+.btn_container span:hover {
+  border-radius: 50%;
+  background: black;
+}
+
+.cheat_command {
+  display: flex;
+  padding: .85em;
+  color: #DFDCE3;
+  justify-content: space-between;
+}
+
+.cheat_command_item {
+  width: 100%;
+}
+
+.description {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
 .command {
-  margin: 1em;
+  margin-left: 0.3em;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.cheat_command .cheat_command_item b:nth-child(2) {
+  font-family: monospace;
+  padding-left: 1px;
 }
 
 .footer {
-  position: fixed;
-  /* position: relative; */
+  position: relative;
   text-align: center;
   bottom: 0;
   left: 0;
@@ -133,46 +193,51 @@ h5 {
   height: 50px;
 }
 
-
-.masonry { /* Masonry container */
-    column-count: 4;
-    column-gap: 1em;
+.main_search {
+  width: 30%;
+  margin: 4em auto;
 }
 
-.item { /* Masonry bricks or child elements */
-    background-color: #eee;
-    display: inline-block;
-    margin: 0 0 1em;
-    width: 100%;
+.empty_content {
+  width: 50%;
+  margin: 10em auto;
+  text-align: center;
+  font-family: sans-serif;
 }
 
-.wrapper {
-    width: 95%;
-    margin: 3em auto;
+.empty_command {
+  width: 50%;
+  margin: 10em 25%;
+  text-align: center;
+  font-size: 14px;
+  font-family: monospace;
 }
 
 .masonry {
-    margin: 1.5em 0;
-    padding: 0;
     -moz-column-gap: 1.5em;
     -webkit-column-gap: 1.5em;
     column-gap: 1.5em;
-    font-size: .85em;
+    font-size: .88em;
+    font-family: sans-serif;
+    margin: 8em auto;
+    width: 100%
 }
 
 .item {
     display: inline-block;
-    overflow-y: scroll;
-    background: #353434;
     list-style: none;
-    padding: 1em;
-    margin: 0 0 1.5em;
+    padding: 0;
+    border-radius: 9px;
+    overflow: auto;
+    color: #777777;
+    margin: 0.5px;
     width: 100%;
-	-webkit-transition:1s ease all;
+	  -webkit-transition:1s ease all;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    box-shadow: 1px 1px 2px 0 #777777;
+    opacity: 0.85s;
+    box-shadow: 0px 1px 2px 0 #777777;
 }
 
 @media only screen and (min-width: 300px) {
