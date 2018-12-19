@@ -6,7 +6,7 @@ import PasswordInput from '../common/PasswordInput';
 import ConfirmPasswordInput from '../common/ConfirmPasswordInput';
 import {FormErrors} from '../common/FormErrors';
 
-const RegisterForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled}) => {
+export const RegisterForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled}) => {
   return (
     <form className='login-form'
       onSubmit={handleOnSubmit}>

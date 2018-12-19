@@ -21,7 +21,7 @@ const SecretRoute = ({ component: Component, ...rest }) => (
   )} />
 );
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <Router>
