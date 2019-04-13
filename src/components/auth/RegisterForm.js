@@ -6,11 +6,11 @@ import PasswordInput from '../common/PasswordInput';
 import ConfirmPasswordInput from '../common/ConfirmPasswordInput';
 import {FormErrors} from '../common/FormErrors';
 
-const RegisterForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled}) => {
+export const RegisterForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled}) => {
   return (
     <form className='login-form'
       onSubmit={handleOnSubmit}>
-      <h3>Register</h3>
+      <h3>Register Form</h3>
       <FormErrors
         formErrors={formErrors} />
       <br/>
