@@ -1,16 +1,19 @@
-FROM node:10.14.0
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-COPY package.json /usr/src/app/package.json
-RUN npm install --silent
-RUN npm install react-scripts -g --silent
-COPY . /usr/src/app
+ARG NODE_VERSION=10
 
-# RUN npm run build
-#
-# ### STAGE 2: Production Environment ###
-# FROM nginx:1.13.12-alpine
-# COPY --from=build /usr/src/app/build /usr/share/nginx/html
+FROM node:${NODE_VERSION}-alpine
+
+WORKDIR /usr/src/app
+
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
+COPY package.json .
+COPY package-lock.json  .
+
+RUN npm install --silent &&\
+  npm install react-scripts -g --silent
+
+COPY .  .
+
 EXPOSE 3000
+
 CMD ["npm", "start"]

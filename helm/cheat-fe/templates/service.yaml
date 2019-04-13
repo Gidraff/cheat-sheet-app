@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cheat-fe.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "cheat-fe.name" . }}
+    helm.sh/chart: {{ include "cheat-fe.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 3000
+      protocol: TCP
+      name: http
+      nodePort: 30002
+  selector:
+    app.kubernetes.io/name: {{ include "cheat-fe.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
