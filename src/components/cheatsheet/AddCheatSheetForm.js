@@ -8,7 +8,7 @@ import * as cheatActions from '../../actions/cheatActions';
 import TextInput from '../common/TextInput';
 import {FormErrors} from '../common/FormErrors';
 
-class AddCheatSheetForm extends Component {
+export class AddCheatSheetForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,7 +69,7 @@ class AddCheatSheetForm extends Component {
     const { history } = this.props;
     history.push('/cheats')
   }
-
+  
   render() {
     const isDisabled = this.state.formValid
     return (
@@ -81,6 +81,7 @@ class AddCheatSheetForm extends Component {
           label="Title"
           name="title"
           onChange={this.handleOnChange}
+          formErrors={this.state.formErrors}
         />
 
         <button

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as authActions from '../../actions/authActions';
 import LoginForm from './LoginForm';
 
-class ManageLoginPage extends Component {
+export class ManageLoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
