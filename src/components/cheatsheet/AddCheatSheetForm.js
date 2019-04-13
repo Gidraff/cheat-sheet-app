@@ -69,7 +69,7 @@ export class AddCheatSheetForm extends Component {
     const { history } = this.props;
     history.push('/cheats')
   }
-
+  
   render() {
     const isDisabled = this.state.formValid
     return (

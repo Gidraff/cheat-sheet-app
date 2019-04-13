@@ -10,7 +10,7 @@ export const RegisterForm = ({ handleOnChange, handleOnSubmit, formErrors, isDis
   return (
     <form className='login-form'
       onSubmit={handleOnSubmit}>
-      <h3>Register</h3>
+      <h3>Register Form</h3>
       <FormErrors
         formErrors={formErrors} />
       <br/>
