@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as authActions from '../../actions/authActions';
 
-export class LogoutView extends Component {
+class LogoutView extends Component {
 
   componentWillMount() {
     const {history} =  this.props;
