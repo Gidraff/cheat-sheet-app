@@ -4,10 +4,10 @@ import EmailInput from '../common/EmailInput';
 import PasswordInput from '../common/PasswordInput';
 import {FormErrors} from '../common/FormErrors';
 
-export const LoginForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled}) => {
+const LoginForm = ({ handleOnChange, handleOnSubmit, formErrors, isDisabled}) => {
   return (
     <form className='login-form' onSubmit={handleOnSubmit}>
-      <h3>Login Form</h3>
+      <h3>Login</h3>
       <FormErrors formErrors={formErrors} />
       <br/>
       <EmailInput

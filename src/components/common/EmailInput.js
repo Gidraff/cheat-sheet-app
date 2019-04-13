@@ -36,12 +36,3 @@ EmailInput.propTypes = {
 };
 
 export default EmailInput;
-
-// const handleOnChange = jest.fn();
-// const handleOnSubmit = jest.fn();
-// const formErrors = {email: '', password: ''};
-// const isDisabled = false;
-// const event = {
-//   preventDefault() {},
-//   target: { value: 'the-value'}
-// };
