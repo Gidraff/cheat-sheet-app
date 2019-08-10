@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Gidraff/cheat-sheet-app/tree/fix-circleci.svg?style=svg)](https://circleci.com/gh/Gidraff/cheat-sheet-app/tree/fix-circleci)
+[![CircleCI](https://circleci.com/gh/Gidraff/cheat-sheet-app.svg?style=svg)](https://circleci.com/gh/Gidraff/cheat-sheet-app)
 
 # CheatSheet
 
